@@ -1,5 +1,5 @@
 
-# General Server Overview
+# General Engine (server) Overview
 
 The search engine is implemented as a Flask server in `search_frontend.py`.
 The server follows a modular design in which the search endpoint does not perform retrieval by itself, but instead aggregates and fuses results from several specialized endpoints. Each endpoint is responsible for a different relevance signal, and the final ranking is produced by a weighted combination of these signals, followed by light boosting using global importance measures.
@@ -142,3 +142,4 @@ The GitHub repository contains:
 
 Large index files are not stored in the repository.
 They are hosted in a public Google Storage Bucket, and links are provided in the report submitted via Moodle.
+
