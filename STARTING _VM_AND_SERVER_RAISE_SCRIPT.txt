@@ -1,0 +1,47 @@
+***STARTING VM AND SERVER RAISE SCRIPT***
+
+
+Start VM - 
+PROJECT_NAME="ir-assignment3-480114"
+INSTANCE_NAME="instance-1"
+
+ZONE=$(gcloud compute instances list --project "$PROJECT_NAME" \
+  --filter="name=$INSTANCE_NAME" --format="value(zone)")
+
+gcloud compute instances start "$INSTANCE_NAME" --project "$PROJECT_NAME" --zone "$ZONE"
+
+
+Running check-
+gcloud compute instances list --project "$PROJECT_NAME" \
+  --filter="name=$INSTANCE_NAME" \
+  --format="table(name,zone,status,networkInterfaces[0].accessConfigs[0].natIP)"
+
+
+Connect to VM-
+gcloud compute ssh "sagihor@$INSTANCE_NAME" --project "$PROJECT_NAME" --zone "$ZONE"
+
+
+Server raise- (SHOULD TAKE ABOUT 10 MIN)
+sudo systemctl daemon-reload
+sudo systemctl restart ir-search.service
+sudo systemctl status ir-search.service --no-pager -l | head -n 40
+
+
+Listening check -(AFTER 10 MIN)
+sudo ss -ltnp | grep ':8080' || echo "NOT LISTENING"
+
+
+***STOP VM INSTANCE***
+
+
+Stop command -
+gcloud compute instances list --project "$PROJECT_NAME" \
+  --filter="name=$INSTANCE_NAME" \
+  --format="table(name,zone,status,networkInterfaces[0].accessConfigs[0].natIP)"
+
+
+Stop check -
+gcloud compute instances list --project "$PROJECT_NAME" \
+  --filter="name=$INSTANCE_NAME" \
+  --format="table(name,zone,status,networkInterfaces[0].accessConfigs[0].natIP)"
+(SHOULD ECHO - STATUS: TERMINATED)
