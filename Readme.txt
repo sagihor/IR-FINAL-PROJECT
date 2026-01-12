@@ -147,6 +147,8 @@ The GitHub repository contains:
 - inverted_index_gcp.py : index reader provided by the course staff.
 - Scripts and notebooks for building indexes in GCP.
 - GCP_CREATION_NOTEBOOK: the notebook of generating the indexes and files in the GCP.
+- STARTING_VM_AND_SERVER_RAISE_SCRIPT.txt: Gathers all shell command that neccessary for VM and server raise and VM stop.
 
 Large index files are not stored in the repository.
 They are hosted in a public Google Storage Bucket, and links are provided in the report submitted via Moodle.
+
